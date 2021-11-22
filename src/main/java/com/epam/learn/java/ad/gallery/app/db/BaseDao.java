@@ -121,4 +121,17 @@ abstract public class BaseDao<T> implements BaseDaoI<T> {
 		return "not_existing_table";
 	}
 
+	protected int count(String sql) throws DBProblemException {
+		try(Statement st = con.createStatement()) {
+			try(ResultSet rs = st.executeQuery(sql)){
+				rs.next();
+				return rs.getInt(1);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+			throw new DBProblemException(e);
+		}
+
+	}
+
 }

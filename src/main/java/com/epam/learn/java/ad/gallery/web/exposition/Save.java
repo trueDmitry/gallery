@@ -2,8 +2,8 @@ package com.epam.learn.java.ad.gallery.web.exposition;
 
 
 
-import com.epam.learn.java.ad.gallery.model.Exposition;
-import com.epam.learn.java.ad.gallery.model.Room;
+import com.epam.learn.java.ad.gallery.app.model.Exposition;
+import com.epam.learn.java.ad.gallery.app.model.Room;
 import com.epam.learn.java.ad.gallery.web.RequestHelper;
 import com.epam.learn.java.ad.gallery.web.WebCommand;
 

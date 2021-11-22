@@ -8,7 +8,7 @@ import java.sql.SQLException;
 import java.util.Optional;
 
 import com.epam.learn.java.ad.gallery.api.db.TransactionDaoI;
-import com.epam.learn.java.ad.gallery.model.Transaction;
+import com.epam.learn.java.ad.gallery.app.model.Transaction;
 
 public class TransactionDao extends BaseDao<Transaction> implements TransactionDaoI {
 

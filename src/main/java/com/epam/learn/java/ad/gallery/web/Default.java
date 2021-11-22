@@ -4,7 +4,7 @@ import java.io.IOException;
 
 import javax.servlet.ServletException;
 
-import com.epam.learn.java.ad.gallery.model.User;
+import com.epam.learn.java.ad.gallery.app.model.User;
 
 public class Default extends WebCommand {
 

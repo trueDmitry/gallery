@@ -10,4 +10,6 @@ public interface ServiceProviderI {
 	
 	DatabaseServiceI getDatabaseService();
 
+	ViewServiceI getViewService();
+
 }

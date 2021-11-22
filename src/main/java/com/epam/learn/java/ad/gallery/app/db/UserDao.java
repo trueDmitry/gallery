@@ -12,7 +12,7 @@ import java.util.List;
 
 import org.apache.commons.codec.digest.DigestUtils;
 
-import com.epam.learn.java.ad.gallery.model.User;
+import com.epam.learn.java.ad.gallery.app.model.User;
 
 public class UserDao {
 	

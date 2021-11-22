@@ -10,9 +10,10 @@ import java.util.List;
 import java.util.Optional;
 
 import com.epam.learn.java.ad.gallery.api.db.ExpositionDaoI;
+import com.epam.learn.java.ad.gallery.api.db.FilterI;
 import com.epam.learn.java.ad.gallery.app.exception.DBProblemException;
-import com.epam.learn.java.ad.gallery.model.Exposition;
-import com.epam.learn.java.ad.gallery.model.Room;
+import com.epam.learn.java.ad.gallery.app.model.Exposition;
+import com.epam.learn.java.ad.gallery.app.model.Room;
 
 public class ExpositionDao extends BaseDao<Exposition> implements ExpositionDaoI {
 	
@@ -164,6 +165,39 @@ public class ExpositionDao extends BaseDao<Exposition> implements ExpositionDaoI
 			throw new DBProblemException();
 		} 
 		return Optional.of(expo);
+	}
+
+	@Override
+	public List<Exposition> get(int startIndex, int quantity, FilterI filter) throws DBProblemException {
+		List<Exposition> res = new ArrayList<>();
+
+		StringBuilder sql = new StringBuilder();
+		sql.append("SELECT ").append(FIELDS)
+			.append(" FROM exposition ")
+			.append(" LIMIT ").append(startIndex).append(",").append(quantity);
+		
+		try (Statement st = con.createStatement()) {
+			st.execute(sql.toString());
+			
+			try (ResultSet rs = st.getResultSet()) {
+				while (rs.next()) {
+					Exposition ex = new Exposition();
+					readExposition(ex, rs);
+					setOcupations(con, ex);
+					res.add(ex);
+				}
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+			throw new DBProblemException(e);
+		}
+		return res;
+	}
+
+	@Override
+	public int count(FilterI filter) throws DBProblemException {
+		String sql = "SELECT count(id) FROM exposition";
+		return super.count(sql);
 	}
 
 }

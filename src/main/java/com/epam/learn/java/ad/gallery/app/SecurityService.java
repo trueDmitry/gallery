@@ -7,7 +7,7 @@ import java.util.Map;
 import com.epam.learn.java.ad.gallery.api.SecurityServiceI;
 import com.epam.learn.java.ad.gallery.app.db.UserDao;
 import com.epam.learn.java.ad.gallery.app.exception.AuthenticationException;
-import com.epam.learn.java.ad.gallery.model.User;
+import com.epam.learn.java.ad.gallery.app.model.User;
 import com.epam.learn.java.ad.gallery.web.WebCommand;
 import com.epam.learn.java.ad.gallery.web.exposition.Acquire;
 import com.epam.learn.java.ad.gallery.web.exposition.Delete;

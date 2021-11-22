@@ -10,7 +10,7 @@ import java.util.Optional;
 import com.epam.learn.java.ad.gallery.api.db.WalletDaoI;
 import com.epam.learn.java.ad.gallery.app.exception.DBProblemException;
 import com.epam.learn.java.ad.gallery.app.exception.NoWalletException;
-import com.epam.learn.java.ad.gallery.model.Wallet;
+import com.epam.learn.java.ad.gallery.app.model.Wallet;
 
 public class WalletDao extends BaseDao<Wallet> implements WalletDaoI {
 

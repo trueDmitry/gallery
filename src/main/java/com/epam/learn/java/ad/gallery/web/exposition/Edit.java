@@ -8,6 +8,6 @@ public class Edit extends WebCommand{
 	@Override
 	protected void process() throws Exception {
 		int id = new RequestHelper(request).getId("id");
-		request.setAttribute("expoEditView", serviceProvider.getExpositionService().getExpositionEdit(id));
+		request.setAttribute("expoEditView", serviceProvider.getViewService().getExpositionEdit(id));
 	}
 }

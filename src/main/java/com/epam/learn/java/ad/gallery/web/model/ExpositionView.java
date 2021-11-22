@@ -1,6 +1,6 @@
-package com.epam.learn.java.ad.gallery.web.view;
+package com.epam.learn.java.ad.gallery.web.model;
 
-import com.epam.learn.java.ad.gallery.model.Exposition;
+import com.epam.learn.java.ad.gallery.app.model.Exposition;
 
 public class ExpositionView {
 

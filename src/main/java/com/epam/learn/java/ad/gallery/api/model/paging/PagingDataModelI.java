@@ -1,8 +1,8 @@
-package com.epam.learn.java.ad.gallery.model.paging;
+package com.epam.learn.java.ad.gallery.api.model.paging;
 
 import java.util.List;
 
-interface PagingDataModelI<T> {
+public interface PagingDataModelI<T> {
 	List<T> getData();
 
 	int getCount();

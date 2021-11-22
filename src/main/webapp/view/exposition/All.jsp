@@ -1,4 +1,6 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@page contentType="text/html; charset=UTF-8" %>
+
 <c:set var="adminRoleName" value="admin" />
 <c:set var="userRoleName" value="user" />
 <!DOCTYPE html>
@@ -27,7 +29,19 @@
 						</c:if>
 					</div>
 					<br>
-					<c:forEach items="${expositions}" var="expoView">
+
+					<!-- div class="dataTable-dropdown">
+						<label> <select class="dataTable-selector">
+								<option value="5">5</option>
+								<option value="10" selected="">10</option>
+								<option value="15">15</option>
+								<option value="20">20</option>
+								<option value="25">25</option>
+						</select> entries per page
+						</label>
+					</div -->
+					<br>	
+					<c:forEach items="${data.paginator.fetchData()}" var="expoView">
 						<c:set var="expo" value="${expoView.exposition}" />
 						<div class="card mb-4">
 							<div class="card-header">
@@ -74,6 +88,9 @@
 							</div>
 						</div>
 					</c:forEach>
+					<div class="dataTable-bottom">
+						<jsp:include page="/view/components/Paging.jsp" />
+					</div>
 				</div>
 			</main>
 

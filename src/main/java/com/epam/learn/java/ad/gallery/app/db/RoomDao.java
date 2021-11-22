@@ -11,7 +11,7 @@ import java.util.Optional;
 
 import com.epam.learn.java.ad.gallery.api.db.RoomDaoI;
 import com.epam.learn.java.ad.gallery.app.exception.DBProblemException;
-import com.epam.learn.java.ad.gallery.model.Room;
+import com.epam.learn.java.ad.gallery.app.model.Room;
 
 public class RoomDao extends BaseDao<Room> implements RoomDaoI{
 

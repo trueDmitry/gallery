@@ -1,8 +1,8 @@
-package com.epam.learn.java.ad.gallery.model.paging;
+package com.epam.learn.java.ad.gallery.api.model.paging;
 
 import java.util.List;
 
-abstract class PagingDataAbstractModel <T> implements PagingDataModelI<T> {
+public abstract class PagingDataAbstractModel <T> implements PagingDataModelI<T> {
 
   protected int page;
   protected int step;
@@ -63,7 +63,7 @@ abstract class PagingDataAbstractModel <T> implements PagingDataModelI<T> {
   }
 
   public int getPageCount() {
-	return (int)Math.round(Math.ceil(getCount() / getPageStep()));
+	return (int)Math.round(Math.ceil((float) getCount() / getPageStep()));
   }
 
   public int  getStartIndex() {

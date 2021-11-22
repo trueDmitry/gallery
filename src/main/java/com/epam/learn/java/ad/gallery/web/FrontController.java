@@ -15,7 +15,7 @@ import com.epam.learn.java.ad.gallery.api.ServiceProviderI;
 import com.epam.learn.java.ad.gallery.app.ApplicationContext;
 import com.epam.learn.java.ad.gallery.app.ServiceProvider;
 import com.epam.learn.java.ad.gallery.app.exception.AccessException;
-import com.epam.learn.java.ad.gallery.model.User;
+import com.epam.learn.java.ad.gallery.app.model.User;
 
 /**
  * Servlet implementation class FrontController
@@ -51,6 +51,9 @@ public class FrontController extends HttpServlet {
 
 	protected void dispatch(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+		request.setCharacterEncoding("UTF-8");
+		response.setCharacterEncoding("UTF-8");
+		response.setContentType("text/html; charset=UTF-8");
 		new CommandBuilder(request, response).getCommand().run();
 	}
 

@@ -14,11 +14,11 @@ import com.epam.learn.java.ad.gallery.app.exception.DBProblemException;
 import com.epam.learn.java.ad.gallery.app.exception.LowBalanceException;
 import com.epam.learn.java.ad.gallery.app.exception.NoWalletException;
 import com.epam.learn.java.ad.gallery.app.exception.TickectAlreadyBoughtException;
-import com.epam.learn.java.ad.gallery.model.Exposition;
-import com.epam.learn.java.ad.gallery.model.ExpositionTicket;
-import com.epam.learn.java.ad.gallery.model.Transaction;
-import com.epam.learn.java.ad.gallery.model.User;
-import com.epam.learn.java.ad.gallery.model.Wallet;
+import com.epam.learn.java.ad.gallery.app.model.Exposition;
+import com.epam.learn.java.ad.gallery.app.model.ExpositionTicket;
+import com.epam.learn.java.ad.gallery.app.model.Transaction;
+import com.epam.learn.java.ad.gallery.app.model.User;
+import com.epam.learn.java.ad.gallery.app.model.Wallet;
 
 public class PaymentService implements PaymentServiceI {
 

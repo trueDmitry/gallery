@@ -1,4 +1,4 @@
-package com.epam.learn.java.ad.gallery.model;
+package com.epam.learn.java.ad.gallery.app.model;
 
 import java.util.Objects;
 
