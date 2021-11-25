@@ -48,7 +48,6 @@ public class RequestHelper {
 	}
 
 	public boolean getBoolean(String name) {
-		System.out.println(request.getParameter(name));
 		String val = request.getParameter(name);
 		return !(val == null || Objects.equals("false", val));
 	}

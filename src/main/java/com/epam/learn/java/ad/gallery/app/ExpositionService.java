@@ -1,6 +1,5 @@
 package com.epam.learn.java.ad.gallery.app;
 
-import java.lang.reflect.UndeclaredThrowableException;
 import java.sql.SQLException;
 import java.util.List;
 import java.util.Optional;
@@ -12,15 +11,12 @@ import com.epam.learn.java.ad.gallery.api.SecurityServiceI;
 import com.epam.learn.java.ad.gallery.api.db.ExpositionDaoI;
 import com.epam.learn.java.ad.gallery.api.db.ExpositionOrderDaoI;
 import com.epam.learn.java.ad.gallery.api.db.ExpositionRoomDaoI;
-import com.epam.learn.java.ad.gallery.api.db.RoomDaoI;
 import com.epam.learn.java.ad.gallery.api.db.FilterI;
 import com.epam.learn.java.ad.gallery.app.db.ExpositionDao;
 import com.epam.learn.java.ad.gallery.app.exception.DBProblemException;
 import com.epam.learn.java.ad.gallery.app.model.Exposition;
 import com.epam.learn.java.ad.gallery.app.model.ExpositionRoom;
 import com.epam.learn.java.ad.gallery.app.model.ExpositionTicket;
-import com.epam.learn.java.ad.gallery.web.model.ExpositionEditView;
-import com.epam.learn.java.ad.gallery.web.model.ExpositionView;
 
 public class ExpositionService implements ExpositionServiceI {
 

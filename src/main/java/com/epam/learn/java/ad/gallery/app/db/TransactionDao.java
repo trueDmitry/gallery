@@ -48,7 +48,7 @@ public class TransactionDao extends BaseDao<Transaction> implements TransactionD
 	}
 
 	@Override
-	protected Optional<Transaction> getObject(ResultSet rs) throws SQLException {
+	protected Transaction getObject(ResultSet rs) throws SQLException {
 		// TODO Auto-generated method stub
 		return null;
 	}

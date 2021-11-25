@@ -8,11 +8,9 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
-import java.util.function.Consumer;
 
 import com.epam.learn.java.ad.gallery.api.db.BaseDaoI;
 import com.epam.learn.java.ad.gallery.app.exception.DBProblemException;
-import com.epam.learn.java.ad.gallery.app.model.Exposition;
 
 /**
  * Boundary of database layer
@@ -82,6 +80,12 @@ abstract public class BaseDao<T> implements BaseDaoI<T> {
 
 	protected abstract String selectByIdSQL(int id);
 
+	/**
+	 * 
+	 * @param rs Already checked for next!!!
+	 * @return
+	 * @throws SQLException
+	 */
 	protected abstract T getObject(ResultSet rs) throws SQLException;
 	
 	protected List<T> query(String sql) throws DBProblemException {
@@ -89,9 +93,15 @@ abstract public class BaseDao<T> implements BaseDaoI<T> {
 		try (Statement st = con.createStatement()) {
 			st.execute(sql);
 			try (ResultSet rs = st.getResultSet()) {
-				while (rs.next()) {
+
+				while(rs.next()) {
 					res.add(getObject(rs));
 				}
+				
+//				T var;
+//				while((var = getObject(rs)) != null) {
+//					res.add(var);
+//				}
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();

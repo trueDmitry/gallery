@@ -24,15 +24,12 @@ public class WalletDao extends BaseDao<Wallet> implements WalletDaoI {
 	}
 
 	@Override
-	protected Optional<Wallet> getObject(ResultSet rs) throws SQLException {
-		if (!rs.next()) {
-			return Optional.empty();
-		}
+	protected Wallet getObject(ResultSet rs) throws SQLException {
 		Wallet w = new Wallet();
 		w.setId(rs.getInt(1));
 		w.setUserId(rs.getInt(2));
 		w.setBalance(rs.getInt(3));
-		return Optional.of(w);
+		return w;
 	}
 
 	@Override
@@ -71,9 +68,10 @@ public class WalletDao extends BaseDao<Wallet> implements WalletDaoI {
 	public Wallet getByUser(int userId) throws NoWalletException, DBProblemException {
 		String sql = "SELECT id, user_id, balance FROM wallet WHERE user_id = " + userId;
 		try (Statement st = con.createStatement(); ResultSet rs = st.executeQuery(sql)) {
-			Optional<Wallet> optionalW = getObject(rs);
-			optionalW.orElseThrow(NoWalletException::new);
-			return optionalW.get();
+			if (rs.next()) {
+				return getObject(rs);
+			}
+			throw new NoWalletException();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

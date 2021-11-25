@@ -1,7 +1,5 @@
 package com.epam.learn.java.ad.gallery.web.exposition;
 
-
-
 import com.epam.learn.java.ad.gallery.app.model.Exposition;
 import com.epam.learn.java.ad.gallery.app.model.Room;
 import com.epam.learn.java.ad.gallery.web.RequestHelper;
@@ -18,7 +16,6 @@ public class Save extends WebCommand {
 		if (serviceProvider.getExpositionService().store(expo)) {
 			idParam = String.valueOf(expo.getId()); 
 		}
-		
 		redirect(Edit.class, "id=" + idParam);
 	}
 
@@ -27,9 +24,9 @@ public class Save extends WebCommand {
 			RequestHelper r = new RequestHelper(request);
 			Exposition expo = new Exposition();
 			expo.setId(r.getInt("id"));
-			expo.setTheme(r.getString( "exposition.theme" ));
+			expo.setTheme(r.getString("theme"));
 			expo.setPrice(r.getInt("price"));
-			expo.setStart(r.getDate( "exposition.start" ));
+			expo.setStart(r.getDate("start"));
 			expo.setEnd(r.getDate("end"));
 			expo.setOpen(r.getInt("open"));
 			expo.setClose(r.getInt("close"));
