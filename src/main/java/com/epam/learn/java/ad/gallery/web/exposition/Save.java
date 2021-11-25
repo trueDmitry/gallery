@@ -27,9 +27,9 @@ public class Save extends WebCommand {
 			RequestHelper r = new RequestHelper(request);
 			Exposition expo = new Exposition();
 			expo.setId(r.getInt("id"));
-			expo.setTheme(r.getString("theme"));
+			expo.setTheme(r.getString( "exposition.theme" ));
 			expo.setPrice(r.getInt("price"));
-			expo.setStart(r.getDate("start"));
+			expo.setStart(r.getDate( "exposition.start" ));
 			expo.setEnd(r.getDate("end"));
 			expo.setOpen(r.getInt("open"));
 			expo.setClose(r.getInt("close"));

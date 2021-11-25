@@ -56,7 +56,7 @@ public class RoomDao extends BaseDao<Room> implements RoomDaoI{
 	}
 
 	@Override
-	protected Optional<Room> getObject(ResultSet rs) throws SQLException {
+	protected Room getObject(ResultSet rs) throws SQLException {
 		// TODO Auto-generated method stub
 		return null;
 	}

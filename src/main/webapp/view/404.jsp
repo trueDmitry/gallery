@@ -1,9 +1,10 @@
-<%@page contentType="text/html; charset=UTF-8" %>
+<%@ page contentType="text/html; charset=UTF-8" %>
+<%@include file="/view/components/init.jsp"%>
 
 <!DOCTYPE html>
 <html lang="en">
     <head>
-		<jsp:include page="/view/components/Head.jsp" />    
+		<%@include file="/view/components/Head.jsp" %>    
     </head>
     <body>
         <div id="layoutError">
@@ -14,10 +15,10 @@
                             <div class="col-lg-6">
                                 <div class="text-center mt-4">
                                     <img class="mb-4 img-error" src="assets/img/error-404-monochrome.svg" />
-                                    <p class="lead">This requested URL was not found on this server.</p>
-                                    <a href="index.html">
+                                    <p class="lead"><fmt:message key="error.notfound.msg"/></p>
+                                    <a href="">
                                         <i class="fas fa-arrow-left me-1"></i>
-                                        Return to Dashboard
+                                        <fmt:message key="button.home"/>
                                     </a>
                                 </div>
                             </div>
@@ -27,16 +28,7 @@
             </div>
             <div id="layoutError_footer">
                 <footer class="py-4 bg-light mt-auto">
-                    <div class="container-fluid px-4">
-                        <div class="d-flex align-items-center justify-content-between small">
-                            <div class="text-muted">Copyright &copy; Your Website 2021</div>
-                            <div>
-                                <a href="#">Privacy Policy</a>
-                                &middot;
-                                <a href="#">Terms &amp; Conditions</a>
-                            </div>
-                        </div>
-                    </div>
+                   <%@include file="/view/components/Footer.jsp"%>
                 </footer>
             </div>
         </div>

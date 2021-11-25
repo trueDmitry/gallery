@@ -47,7 +47,7 @@ public class ExpositionRoomDao extends BaseDao<ExpositionRoom> implements Exposi
 	}
 
 	@Override
-	protected Optional<ExpositionRoom> getObject(ResultSet rs) throws SQLException {
+	protected ExpositionRoom getObject(ResultSet rs) throws SQLException {
 		// TODO Auto-generated method stub
 		return null;
 	}

@@ -1,4 +1,5 @@
-<%@page contentType="text/html; charset=UTF-8" %>
+<%@ page contentType="text/html; charset=UTF-8" %>
+<%@include file="/view/components/init.jsp"%>
 
 <!DOCTYPE html>
 <html lang="en">

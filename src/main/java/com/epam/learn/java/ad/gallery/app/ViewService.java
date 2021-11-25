@@ -70,7 +70,7 @@ public class ViewService implements ViewServiceI {
 
 	@Override
 	public ExpositionAllView getExpoViews(int page) throws DBProblemException {
-		int quantity = 3;
+		int quantity = 2;
 
 		// TODO migrate to expoServ
 		FilterI filter = new AndFilter();

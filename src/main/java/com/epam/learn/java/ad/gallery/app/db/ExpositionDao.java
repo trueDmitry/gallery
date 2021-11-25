@@ -8,6 +8,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.function.Consumer;
 
 import com.epam.learn.java.ad.gallery.api.db.ExpositionDaoI;
 import com.epam.learn.java.ad.gallery.api.db.FilterI;
@@ -16,11 +17,11 @@ import com.epam.learn.java.ad.gallery.app.model.Exposition;
 import com.epam.learn.java.ad.gallery.app.model.Room;
 
 public class ExpositionDao extends BaseDao<Exposition> implements ExpositionDaoI {
-	
+
 	public ExpositionDao(Connection con) {
 		super(con);
 	}
-	
+
 	@Override
 	protected String getTambleName() {
 		return "exposition";
@@ -35,7 +36,7 @@ public class ExpositionDao extends BaseDao<Exposition> implements ExpositionDaoI
 		ps.setInt(5, o.getOpen());
 		ps.setInt(6, o.getClose());
 		ps.setInt(7, o.getPublished() ? 1 : 0);
-		if (o.getId() != 0) { 
+		if (o.getId() != 0) {
 			ps.setInt(8, o.getId());
 		}
 	}
@@ -56,17 +57,35 @@ public class ExpositionDao extends BaseDao<Exposition> implements ExpositionDaoI
 
 	@Override
 	protected String selectByIdSQL(int id) {
-		// TODO Auto-generated method stub
-		return null;
+		return "SELECT " + FIELDS + "FROM exposition WHERE id =" + id;
 	}
 
 	@Override
-	protected Optional<Exposition> getObject(ResultSet rs) throws SQLException {
-		// TODO Auto-generated method stub
-		return null;
+	protected Exposition getObject(ResultSet rs) throws SQLException {
+		Exposition ex = new Exposition();
+		ex.setId(rs.getInt(1));
+		ex.setTheme(rs.getString(2));
+		ex.setPrice(rs.getInt(3));
+		ex.setStart(rs.getDate(4));
+		ex.setEnd(rs.getDate(5));
+		ex.setOpen(rs.getInt(6));
+		ex.setClose(rs.getInt(7));
+		ex.setPublished(rs.getInt(8) == 1);
+		setOcupations(con, ex);
+		return ex;
 	}
 
-	
+	// " id, theme, price, start, end, from_time, till_time, published ";
+	private static void readExposition(Exposition ex, ResultSet rs) throws SQLException {
+		ex.setId(rs.getInt(1));
+		ex.setTheme(rs.getString(2));
+		ex.setPrice(rs.getInt(3));
+		ex.setStart(rs.getDate(4));
+		ex.setEnd(rs.getDate(5));
+		ex.setOpen(rs.getInt(6));
+		ex.setClose(rs.getInt(7));
+		ex.setPublished(rs.getInt(8) == 1);
+	}
 
 	private static final String FIELDS = " id, theme, price, start, end, from_time, till_time, published ";
 
@@ -114,7 +133,8 @@ public class ExpositionDao extends BaseDao<Exposition> implements ExpositionDaoI
 	private static void setOcupations(Connection con, Exposition ex) throws SQLException {
 		ArrayList<Room> rooms = new ArrayList<>();
 
-		String sql = "SELECT `id`, `name` FROM exposition_room JOIN room ON room_id = id WHERE exposition_id = " + ex.getId();
+		String sql = "SELECT `id`, `name` FROM exposition_room JOIN room ON room_id = id WHERE exposition_id = "
+				+ ex.getId();
 		try (Statement st = con.createStatement()) {
 			st.execute(sql);
 			try (ResultSet rs = st.getResultSet()) {
@@ -133,65 +153,13 @@ public class ExpositionDao extends BaseDao<Exposition> implements ExpositionDaoI
 		r.setName(rs.getString(2));
 	}
 
-	// " id, theme, price, start, end, from_time, till_time, published ";
-	private static void readExposition(Exposition ex, ResultSet rs) throws SQLException {
-		ex.setId(rs.getInt(1));
-		ex.setTheme(rs.getString(2));
-		ex.setPrice(rs.getInt(3));
-		ex.setStart(rs.getDate(4));
-		ex.setEnd(rs.getDate(5));
-		ex.setOpen(rs.getInt(6));
-		ex.setClose(rs.getInt(7));
-		ex.setPublished(rs.getInt(8) == 1);
-	}
-
-	@Override
-	public Optional<Exposition> get(int id) throws DBProblemException  {
-		Exposition expo = null;
-
-		String sql = "SELECT " + FIELDS + "FROM exposition WHERE id =" + id;
-		try (Connection con = ConnectionPool.getConnection(); Statement st = con.createStatement()) {
-			st.execute(sql);
-			try (ResultSet rs = st.getResultSet()) {
-				if (rs.next()) {
-					expo = new Exposition();
-					readExposition(expo, rs);
-					setOcupations(con, expo);
-				}
-			}
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-			throw new DBProblemException();
-		} 
-		return Optional.of(expo);
-	}
-
 	@Override
 	public List<Exposition> get(int startIndex, int quantity, FilterI filter) throws DBProblemException {
-		List<Exposition> res = new ArrayList<>();
 
-		StringBuilder sql = new StringBuilder();
-		sql.append("SELECT ").append(FIELDS)
-			.append(" FROM exposition ")
-			.append(" LIMIT ").append(startIndex).append(",").append(quantity);
-		
-		try (Statement st = con.createStatement()) {
-			st.execute(sql.toString());
-			
-			try (ResultSet rs = st.getResultSet()) {
-				while (rs.next()) {
-					Exposition ex = new Exposition();
-					readExposition(ex, rs);
-					setOcupations(con, ex);
-					res.add(ex);
-				}
-			}
-		} catch (SQLException e) {
-			e.printStackTrace();
-			throw new DBProblemException(e);
-		}
-		return res;
+		StringBuilder sql = new StringBuilder().append("SELECT ").append(FIELDS).append(" FROM exposition ")
+				.append(" LIMIT ").append(startIndex).append(",").append(quantity);
+
+		return query(sql.toString());
 	}
 
 	@Override

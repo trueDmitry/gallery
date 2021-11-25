@@ -52,7 +52,7 @@ public class ExpositionOrderDao extends BaseDao<ExpositionTicket> implements Exp
 	}
 
 	@Override
-	protected Optional<ExpositionTicket> getObject(ResultSet rs) throws SQLException {
+	protected ExpositionTicket getObject(ResultSet rs) throws SQLException {
 		ExpositionTicket order = new ExpositionTicket();
 		order.setId(rs.getInt(1));
 		order.setExpositionId(rs.getInt(2));
@@ -60,7 +60,7 @@ public class ExpositionOrderDao extends BaseDao<ExpositionTicket> implements Exp
 		order.setPrice(rs.getInt(4));
 		order.setCreateDate(rs.getDate(5));
 		order.setTransactionId(rs.getInt(6));
-		return Optional.of(order);
+		return order;
 	}
 
 	public Optional<ExpositionTicket> find(int expoId, int userId) throws DBProblemException {
@@ -68,7 +68,7 @@ public class ExpositionOrderDao extends BaseDao<ExpositionTicket> implements Exp
 				+ "WHERE exposition_id = " + expoId + " AND " + " user_id = " + userId;
 		try(Statement st = con.createStatement(); ResultSet rs = st.executeQuery(sql)) {
 			if (rs.next()) {
-				return getObject(rs);
+				return Optional.of(getObject(rs));
 			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -84,7 +84,7 @@ public class ExpositionOrderDao extends BaseDao<ExpositionTicket> implements Exp
 				+ "WHERE  user_id = " + userId;
 		try(Statement st = con.createStatement(); ResultSet rs = st.executeQuery(sql)) {
 			while (rs.next()) {
-				list.add(getObject(rs).get());
+				list.add(getObject(rs));
 			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block

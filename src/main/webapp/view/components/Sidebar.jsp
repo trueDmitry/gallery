@@ -1,11 +1,13 @@
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ page contentType="text/html; charset=UTF-8" %>
+
 <nav class="sb-sidenav accordion sb-sidenav-dark" id="sidenavAccordion">
 	<div class="sb-sidenav-menu">
 		<div class="nav">
 			<a class="nav-link" href="exposition/All">
 				<div class="sb-nav-link-icon">
 					<i class="fas fa-tachometer-alt"></i>
-				</div> Expositions
+				</div>
+				<fmt:message key="sidemenu.expositions"/>
 			</a>
 		</div>
 	</div>

@@ -5,11 +5,14 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.function.Consumer;
 
 import com.epam.learn.java.ad.gallery.api.db.BaseDaoI;
 import com.epam.learn.java.ad.gallery.app.exception.DBProblemException;
+import com.epam.learn.java.ad.gallery.app.model.Exposition;
 
 /**
  * Boundary of database layer
@@ -79,15 +82,34 @@ abstract public class BaseDao<T> implements BaseDaoI<T> {
 
 	protected abstract String selectByIdSQL(int id);
 
-	protected abstract Optional<T> getObject(ResultSet rs) throws SQLException;
-
+	protected abstract T getObject(ResultSet rs) throws SQLException;
+	
+	protected List<T> query(String sql) throws DBProblemException {
+		List<T> res = new ArrayList<>();
+		try (Statement st = con.createStatement()) {
+			st.execute(sql);
+			try (ResultSet rs = st.getResultSet()) {
+				while (rs.next()) {
+					res.add(getObject(rs));
+				}
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+			throw new DBProblemException(e);
+		}
+		return res;
+	}
+	
 	public Optional<T> get(int id) throws DBProblemException {
 		String sql = selectByIdSQL(id);
 		try (Statement st = con.createStatement(); ResultSet rs = st.executeQuery(sql)) {
-			return getObject(rs);
+			if (rs.next()) {
+				return Optional.of(getObject(rs));
+			} 
+			return Optional.empty();
 		} catch (SQLException e) {
 			e.printStackTrace();
-			throw new DBProblemException();
+			throw new DBProblemException(e);
 		}
 	}
 

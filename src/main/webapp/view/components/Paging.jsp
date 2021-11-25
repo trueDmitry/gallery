@@ -1,13 +1,13 @@
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<%@page contentType="text/html; charset=UTF-8"%>
+<%@ page contentType="text/html; charset=UTF-8" %>
+
 <c:set var="paginator" value="${data.paginator}" />
 
 <div class="dataTable-info">
-Showing element ${paginator.getStartNumber()}
+<fmt:message key="content.paging.from"/> ${paginator.getStartNumber()}
 	<c:if test="${paginator.startNumber != paginator.endNumber}">
-		to ${paginator.endNumber}		
+		<fmt:message key="content.paging.to"/> ${paginator.endNumber}		
 	</c:if>	 
- of total ${paginator.count }</div>
+ <fmt:message key="content.paging.total"/> ${paginator.count }</div>
 
 <c:if test="${paginator.pageCount > 1}">
 	<nav class="dataTable-pagination">

@@ -1,5 +1,10 @@
 eclipse.preferences.version=1
 encoding//finaltask/\u0412\u0438\u0441\u0442\u0430\u0432\u043A\u0438_ua.txt=UTF-8
 encoding//finaltask/\u0412\u0438\u0441\u0442\u0430\u0432\u043A\u0438_ua_path.txt=UTF-8
+encoding//src/main/resources/lang.properties=UTF-8
+encoding//src/main/resources/lang_ua.properties=UTF-8
+encoding//src/main/webapp/view/components/BasementScripts.jsp=UTF-8
+encoding//src/main/webapp/view/components/Head.jsp=UTF-8
+encoding//src/main/webapp/view/components/Navbar.jsp=UTF-8
 encoding//src/main/webapp/view/exposition/All.jsp=UTF-8
 encoding/<project>=UTF-8

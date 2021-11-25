@@ -21,3 +21,20 @@
 
 # virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
 hs_err_pid*
+.idea/encodings.xml
+.idea/misc.xml
+.idea/modules.xml
+.idea/resourceBundles.xml
+.idea/runConfigurations.xml
+.idea/sonarlint/issuestore/2/e/2e22b6edd746fa3dc40ad7276c87c8d87d72a392
+.idea/sonarlint/issuestore/6/5/65d8ab74a17173f8f4b1c100ff589c0d481f7635
+.idea/sonarlint/issuestore/8/2/822c8b9c07080066c12bbd300c4cfeef44333992
+.idea/sonarlint/issuestore/8/b/8bdde220eb017ff63f58e95249b7465846719dc1
+.idea/sonarlint/issuestore/8/e/8ec9a00bfd09b3190ac6b22251dbb1aa95a0579d
+.idea/sonarlint/issuestore/b/0/b06941821dcf6e2bcdf2b4d3eb9cbc431baaac47
+.idea/sonarlint/issuestore/b/a/ba61ce8f569586798b33cc17c2005cfdb91bc319
+.idea/sonarlint/issuestore/index.pb
+.idea/vcs.xml
+build/classes/lang.properties
+build/classes/lang_ua.properties
+gallery.iml
