@@ -1,21 +1,12 @@
 package com.epam.learn.java.ad.gallery.web;
 
 import java.io.IOException;
-import java.lang.reflect.InvocationTargetException;
 
-import javax.servlet.RequestDispatcher;
-import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
-import com.epam.learn.java.ad.gallery.api.ServiceProviderI;
-import com.epam.learn.java.ad.gallery.app.ApplicationContext;
-import com.epam.learn.java.ad.gallery.app.ServiceProvider;
-import com.epam.learn.java.ad.gallery.app.exception.AccessException;
-import com.epam.learn.java.ad.gallery.app.model.User;
 
 /**
  * Servlet implementation class FrontController

@@ -8,6 +8,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.apache.logging.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+
 import com.epam.learn.java.ad.gallery.api.ServiceProviderI;
 import com.epam.learn.java.ad.gallery.app.ApplicationContext;
 import com.epam.learn.java.ad.gallery.app.ServiceProvider;
@@ -29,7 +32,9 @@ public abstract class WebCommand {
 	private boolean redirect;
 	protected ServiceProviderI serviceProvider;
 	protected ApplicationContext appContext; 
-
+	
+	Logger logger = LogManager.getLogger("com.epam.learn.java.ad.gallery");
+	
 	public WebCommand init(ServletContext servletContext, HttpServletRequest servletRequest,
 			HttpServletResponse servletResponse) {
 		this.context = servletContext;
@@ -52,8 +57,8 @@ public abstract class WebCommand {
 			addEssentials();
 			showResult();
 		} catch (Exception e) {
+			logger.error(e.getMessage(), e);
 			forward("/view/500.jsp");
-			e.printStackTrace();
 		}
 	}
 
@@ -93,7 +98,7 @@ public abstract class WebCommand {
 	}
 
 	protected void forward(String path) throws ServletException, IOException {
-		addAppContextValiables(request);
+		//addAppContextValiables(request);
 		context.getRequestDispatcher(path).forward(request, response);
 	}
 
