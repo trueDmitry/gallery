@@ -20,23 +20,23 @@ public abstract class PagingDataAbstractModel <T> implements PagingDataModelI<T>
     this.page = page < 1 ? 1 : page;
   }
 
-  public List<T> getData() {
+  public List<T> getData() throws PagingException {
     if (data == null) {
       data = fetchData();
     }
     return data;
   }
 
-  public int getCount() {
+  public int getCount() throws PagingException {
     if (count == null ) {
       count = countTotal();
     }
     return count;
   }
 
-  protected abstract List<T> fetchData();
+  protected abstract List<T> fetchData() throws PagingException;
   
-  protected abstract int countTotal();
+  protected abstract int countTotal() throws PagingException;
 
   public void setPageStep(int step) {
     this.step = step;
@@ -50,44 +50,44 @@ public abstract class PagingDataAbstractModel <T> implements PagingDataModelI<T>
     this.page = page;
   }
 
-  private void validateCurPage() {
+  private void validateCurPage() throws PagingException {
     int pageCount = getPageCount();
     if (page > pageCount) {
       page = pageCount;
     }
   }
 
-  public int getPage() {
+  public int getPage() throws PagingException {
     validateCurPage();
     return page;
   }
 
-  public int getPageCount() {
+  public int getPageCount() throws PagingException {
 	return (int)Math.round(Math.ceil((float) getCount() / getPageStep()));
   }
 
-  public int  getStartIndex() {
+  public int  getStartIndex() throws PagingException {
     page = getPage();
     return (page > 0 ? page - 1 : 0) * step;
   }
 
-  public boolean hasRightPages() {
+  public boolean hasRightPages() throws PagingException {
     return getStartIndex() + step < getCount();
   }
 
-  public boolean hasLeftPages() {
+  public boolean hasLeftPages() throws PagingException {
     return getPage() > 1;
   }
 
-  public int getStartNumber() {
+  public int getStartNumber() throws PagingException {
     return getStartIndex() + 1;
   }
 
-  public int getEndNumber() {
+  public int getEndNumber() throws PagingException {
     return getStartIndex() + getDataCount();
   }
 
-  protected int getDataCount() {
+  protected int getDataCount() throws PagingException {
     return getData().size();
   }
 

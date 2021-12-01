@@ -38,9 +38,7 @@ abstract public class BaseDao<T> implements BaseDaoI<T> {
 				updateKey(object, rs.getInt(1));
 			}
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-			throw new DBProblemException();
+			throw new DBProblemException(e);
 		}
 	}
 
@@ -56,9 +54,7 @@ abstract public class BaseDao<T> implements BaseDaoI<T> {
 			}
 			ps.executeBatch();
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-			throw new DBProblemException();
+			throw new DBProblemException(e);
 		}
 	}
 
@@ -71,11 +67,8 @@ abstract public class BaseDao<T> implements BaseDaoI<T> {
 			putObject(ps, o);
 			ps.executeUpdate();
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-			throw new DBProblemException();
+			throw new DBProblemException(e);
 		}
-		;
 	}
 
 	protected abstract String selectByIdSQL(int id);
@@ -104,7 +97,6 @@ abstract public class BaseDao<T> implements BaseDaoI<T> {
 //				}
 			}
 		} catch (SQLException e) {
-			e.printStackTrace();
 			throw new DBProblemException(e);
 		}
 		return res;
@@ -118,7 +110,6 @@ abstract public class BaseDao<T> implements BaseDaoI<T> {
 			} 
 			return Optional.empty();
 		} catch (SQLException e) {
-			e.printStackTrace();
 			throw new DBProblemException(e);
 		}
 	}
@@ -133,8 +124,7 @@ abstract public class BaseDao<T> implements BaseDaoI<T> {
 			try {
 				con.close();
 			} catch (SQLException e) {
-				e.printStackTrace();
-				throw new DBProblemException();
+				throw new DBProblemException(e);
 			}
 	}
 	
@@ -144,8 +134,7 @@ abstract public class BaseDao<T> implements BaseDaoI<T> {
 		try (Statement st = con.createStatement()){
 			st.execute(sql);
 		} catch (SQLException e) {
-			e.printStackTrace();
-			throw new DBProblemException();
+			throw new DBProblemException(e);
 		} 
 	}
 
@@ -160,7 +149,6 @@ abstract public class BaseDao<T> implements BaseDaoI<T> {
 				return rs.getInt(1);
 			}
 		} catch (SQLException e) {
-			e.printStackTrace();
 			throw new DBProblemException(e);
 		}
 

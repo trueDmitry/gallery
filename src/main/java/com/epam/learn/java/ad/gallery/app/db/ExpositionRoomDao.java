@@ -58,9 +58,7 @@ public class ExpositionRoomDao extends BaseDao<ExpositionRoom> implements Exposi
 			String sqlRoomsClean = "DELETE FROM exposition_room WHERE exposition_id = " + id;
 			s.execute(sqlRoomsClean);
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-			throw new DBProblemException();
+			throw new DBProblemException(e);
 		}
 	}
 

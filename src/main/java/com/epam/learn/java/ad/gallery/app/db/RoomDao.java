@@ -77,8 +77,7 @@ public class RoomDao extends BaseDao<Room> implements RoomDaoI{
 				}
 			} 
 		}catch (SQLException e) {
-			e.printStackTrace();
-			throw new DBProblemException();
+			throw new DBProblemException(e);
 		}
 		return res;	
 	}

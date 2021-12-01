@@ -16,12 +16,12 @@ public class Paginator<T> extends PagingDataAbstractModel<T> {
 	}
 
 	@Override
-	public List<T> fetchData() {
+	public List<T> fetchData() throws PagingException {
 		return model.fetchData(getStartIndex(), getPageStep());
 	}
 
 	@Override
-	public int countTotal() {
+	public int countTotal() throws PagingException {
 		return model.countTotal();
 	}
 

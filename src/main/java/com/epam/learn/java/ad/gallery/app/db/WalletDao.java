@@ -73,9 +73,7 @@ public class WalletDao extends BaseDao<Wallet> implements WalletDaoI {
 			}
 			throw new NoWalletException();
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-			throw new DBProblemException();
+			throw new DBProblemException(e);
 		}
 	}
 
@@ -84,9 +82,7 @@ public class WalletDao extends BaseDao<Wallet> implements WalletDaoI {
 		try (Statement st = con.createStatement()) {
 			st.execute(sql);
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-			throw new DBProblemException();
+			throw new DBProblemException(e);
 		}
 	}
 

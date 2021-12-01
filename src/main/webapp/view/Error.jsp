@@ -14,8 +14,11 @@
                         <div class="row justify-content-center">
                             <div class="col-lg-6">
                                 <div class="text-center mt-4">
-                                    <h1 class="display-1">500</h1>
-                                    <p><fmt:message key="error.server.msg"/></p>
+                                    <h1 class="display-1">${errorCode.code}</h1>
+                                    <c:if test="${errorCode.code} == 404">
+                                      <img class="mb-4 img-error" src="assets/img/error-${errorCode.code}-monochrome.svg" />
+                                    </c:if> 
+                                    <p><fmt:message key="error.http.${errorCode.toString()}"/></p>
                                     <a href="">
                                         <i class="fas fa-arrow-left me-1"></i>
                                         <fmt:message key="button.home"/>

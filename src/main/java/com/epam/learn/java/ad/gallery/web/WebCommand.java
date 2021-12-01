@@ -31,9 +31,11 @@ public abstract class WebCommand {
 	private String viewPath;
 	private boolean redirect;
 	protected ServiceProviderI serviceProvider;
-	protected ApplicationContext appContext; 
+	protected ApplicationContext appContext;
+	protected HttpCode httpCode = HttpCode.OK; 
 	
-	Logger logger = LogManager.getLogger("com.epam.learn.java.ad.gallery");
+	
+	protected static Logger logger = LogManager.getLogger();
 	
 	public WebCommand init(ServletContext servletContext, HttpServletRequest servletRequest,
 			HttpServletResponse servletResponse) {
@@ -42,26 +44,40 @@ public abstract class WebCommand {
 		this.response = servletResponse;
 		
 		this.serviceProvider = new ServiceProvider(getAppContext());
+		
 		return this;
 	}
 
 	public void run() throws ServletException, IOException {
 
 		if (!serviceProvider.getSecurityService().checkAccess(this.getClass())) {
-			forward("/view/401.jsp");
+			forwardError(HttpCode.UNAUTHORIZED);
 			return;
 		}
 
 		try {
 			process();
-			addEssentials();
-			showResult();
+			
 		} catch (Exception e) {
 			logger.error(e.getMessage(), e);
-			forward("/view/500.jsp");
+			forwardError(HttpCode.INTERNAL_SERVER_ERROR);
+			return;
 		}
+		
+		if (httpCode != HttpCode.OK) {
+			forwardError(httpCode);
+			return;
+		}
+
+		addEssentials();
+		showResult();
 	}
 
+	protected void forwardError(HttpCode code) throws ServletException, IOException {
+		String path = "/view/Error.jsp";
+		request.setAttribute("errorCode", code);
+		context.getRequestDispatcher(path).forward(request, response);
+	}
 	
 	protected void addEssentials() {
 		request.setAttribute("user", appContext.getUser());
@@ -98,7 +114,7 @@ public abstract class WebCommand {
 	}
 
 	protected void forward(String path) throws ServletException, IOException {
-		//addAppContextValiables(request);
+		addAppContextValiables(request);
 		context.getRequestDispatcher(path).forward(request, response);
 	}
 

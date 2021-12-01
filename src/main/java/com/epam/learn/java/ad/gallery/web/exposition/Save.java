@@ -2,6 +2,7 @@ package com.epam.learn.java.ad.gallery.web.exposition;
 
 import com.epam.learn.java.ad.gallery.app.model.Exposition;
 import com.epam.learn.java.ad.gallery.app.model.Room;
+import com.epam.learn.java.ad.gallery.web.HttpCode;
 import com.epam.learn.java.ad.gallery.web.RequestHelper;
 import com.epam.learn.java.ad.gallery.web.WebCommand;
 
@@ -9,8 +10,13 @@ public class Save extends WebCommand {
 
 	@Override
 	protected void process() throws Exception {
-		// TODO return some error and change all this code 
+		// TODO  
 		Exposition expo = getRequestExposition();
+		if (expo == null) {
+			httpCode = HttpCode.UNPROCESSABLE_ENTRY; 
+			return;
+		}
+		
 		String idParam = request.getParameter("id"); 
 		
 		if (serviceProvider.getExpositionService().store(expo)) {
@@ -20,9 +26,11 @@ public class Save extends WebCommand {
 	}
 
 	private Exposition getRequestExposition() {
+		// TODO add specific errors
+		Exposition expo;
 		try {
 			RequestHelper r = new RequestHelper(request);
-			Exposition expo = new Exposition();
+			expo = new Exposition();
 			expo.setId(r.getInt("id"));
 			expo.setTheme(r.getString("theme"));
 			expo.setPrice(r.getInt("price"));
@@ -35,11 +43,10 @@ public class Save extends WebCommand {
 				expo.addRoom(new Room(id));
 			});
 			expo.setPublished((r.getBoolean("published")));
-			return expo;
 		} catch (Exception e) {
-			e.printStackTrace();
 			return null;
 		}
+		return expo;
 	}
 
 }

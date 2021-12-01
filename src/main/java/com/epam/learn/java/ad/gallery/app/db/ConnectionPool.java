@@ -39,11 +39,8 @@ public class ConnectionPool {
 			DataSource ds = (DataSource) ctx.lookup("java:comp/env/jdbc/connections");
 			c = ds.getConnection();
 			c.setAutoCommit(true);
-		} catch (NamingException e) {
-			// TODO process pullConnection errors
-			e.printStackTrace();
-		} catch (SQLException e) {
-			e.printStackTrace();
+		} catch (NamingException | SQLException e) {
+			throw new IllegalStateException(e);
 		}
 		return c;
 	}

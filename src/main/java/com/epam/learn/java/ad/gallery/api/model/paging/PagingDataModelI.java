@@ -3,19 +3,19 @@ package com.epam.learn.java.ad.gallery.api.model.paging;
 import java.util.List;
 
 public interface PagingDataModelI<T> {
-	List<T> getData();
+	List<T> getData() throws PagingException;
 
-	int getCount();
+	int getCount() throws PagingException;
 
 	void setPage(int page);
 
-	int getPage();
+	int getPage() throws PagingException;
 
 	void setPageStep(int step);
 
 	int getPageStep();
 
-	int getPageCount();
+	int getPageCount() throws PagingException;
 
-	boolean hasRightPages();
+	boolean hasRightPages() throws PagingException;
 }

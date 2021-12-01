@@ -71,8 +71,7 @@ public class ExpositionService implements ExpositionServiceI {
 			}
 			return ExpositionDao.getPublishedExpositions();
 		} catch (SQLException e) {
-			e.printStackTrace();
-			throw new DBProblemException();
+			throw new DBProblemException(e);
 		}
 	}
 

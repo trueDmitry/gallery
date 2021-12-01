@@ -4,18 +4,25 @@
 		<Console name="Console" target="SYSTEM_OUT">
 			<PatternLayout
 				pattern="%d{yyyy-MM-dd HH:mm:ss:SSS} [%-10t] %-5level %logger{5} - %msg%n" />
-			<LevelRangeFilter minLevel="ERROR" maxLevel="DEBUG" />
+			<LevelRangeFilter minLevel="FATAL" maxLevel="TRACE" />
 		</Console>
 		<File name="ErrorLog" fileName="D:/temp/error.log">
 			<PatternLayout
 				pattern="%d{yyyy-MM-dd HH:mm:ss:SSS} [%-10t] %-5level %logger{5} - %msg%n %throwable" />
-			<LevelRangeFilter minLevel="FATAL" maxLevel="DEBUG" />
+			<LevelRangeFilter minLevel="FATAL" maxLevel="WARN" />
 		</File>
 	</Appenders>
 	<Loggers>
-		<Root level="DEBUG">
-			<AppenderRef ref="Console" />
+		<Root level="WARN">
 			<AppenderRef ref="ErrorLog" />
 		</Root>
+		<!-- all app DEBUG logger  -->
+		<logger level="DEBUG" name ="com.epam.learn.java.ad.gallery">
+			<AppenderRef ref="Console" />
+		</logger>
+		
+		<!-- web package logger  -->
+		<logger level="TRACE" name ="com.epam.learn.java.ad.gallery.web">
+		</logger>
 	</Loggers>
 </Configuration>

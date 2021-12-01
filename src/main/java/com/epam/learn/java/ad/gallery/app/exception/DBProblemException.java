@@ -9,7 +9,7 @@ public class DBProblemException extends Exception{
 	 */
 	private static final long serialVersionUID = 237521035573750317L;
 
-	public DBProblemException(SQLException e) {
+	public DBProblemException(Exception e) {
 		super(e);
 	}
 

@@ -50,9 +50,7 @@ public class MysqlService implements DatabaseServiceI {
 		try {
 			con.setAutoCommit(false);
 		} catch (SQLException e) {
-			// TODO logging
-			e.printStackTrace();
-			throw new DBProblemException();
+			throw new DBProblemException(e);
 		}
 	}
 
@@ -63,9 +61,7 @@ public class MysqlService implements DatabaseServiceI {
 				con.commit();
 				con.close();
 			} catch (SQLException e) {
-				// TODO logging
-				e.printStackTrace();
-				throw new DBProblemException();
+				throw new DBProblemException(e);
 			}
 			con = null;
 		}

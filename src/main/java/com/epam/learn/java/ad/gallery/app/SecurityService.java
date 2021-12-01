@@ -35,7 +35,6 @@ public class SecurityService implements SecurityServiceI {
 			user = UserDao.getUser(name, password);
 			appContext.setUser(user);
 		} catch (Exception e) {
-			e.printStackTrace();
 			throw new AuthenticationException(e);
 		}
 		return user != null;

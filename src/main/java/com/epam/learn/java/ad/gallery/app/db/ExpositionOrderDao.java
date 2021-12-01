@@ -71,9 +71,7 @@ public class ExpositionOrderDao extends BaseDao<ExpositionTicket> implements Exp
 				return Optional.of(getObject(rs));
 			}
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-			throw new DBProblemException();
+			throw new DBProblemException(e);
 		}
 		return Optional.empty();
 	}
@@ -87,9 +85,7 @@ public class ExpositionOrderDao extends BaseDao<ExpositionTicket> implements Exp
 				list.add(getObject(rs));
 			}
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-			throw new DBProblemException();
+			throw new DBProblemException(e);
 		}
 		return list;
 	}

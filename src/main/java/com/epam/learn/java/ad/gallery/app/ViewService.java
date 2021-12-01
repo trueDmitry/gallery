@@ -16,6 +16,7 @@ import com.epam.learn.java.ad.gallery.api.db.RoomDaoI;
 import com.epam.learn.java.ad.gallery.api.db.FilterI;
 import com.epam.learn.java.ad.gallery.api.model.paging.PaginSourceI;
 import com.epam.learn.java.ad.gallery.api.model.paging.Paginator;
+import com.epam.learn.java.ad.gallery.api.model.paging.PagingException;
 import com.epam.learn.java.ad.gallery.app.db.AndFilter;
 import com.epam.learn.java.ad.gallery.app.exception.DBProblemException;
 import com.epam.learn.java.ad.gallery.app.model.Exposition;
@@ -110,7 +111,7 @@ public class ViewService implements ViewServiceI {
 		}
 
 		@Override
-		public List<ExpositionView> fetchData(int startIndex, int quantity) {
+		public List<ExpositionView> fetchData(int startIndex, int quantity) throws PagingException {
 			List<ExpositionView> expoViews = new ArrayList<>();
 			
 			try (ExpositionDaoI expoDao = db.getExpositionDao()) {
@@ -125,19 +126,18 @@ public class ViewService implements ViewServiceI {
 				}).collect(Collectors.toList());
 
 			} catch (DBProblemException e) {
-				e.printStackTrace();
+				throw new PagingException(e);
 			}
 			return expoViews;
 		}
 
 		@Override
-		public int countTotal() {
+		public int countTotal() throws PagingException {
 			try (ExpositionDaoI expoDao = db.getExpositionDao()) {
 				return expoDao.count(filter);
 			} catch (DBProblemException e) {
-				e.printStackTrace();
+				throw new PagingException(e);
 			}
-			return 0;
 		}
 
 	}
