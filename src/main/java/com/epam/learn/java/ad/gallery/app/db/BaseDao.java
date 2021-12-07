@@ -7,9 +7,15 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import com.epam.learn.java.ad.gallery.api.db.BaseDaoI;
+import com.epam.learn.java.ad.gallery.api.db.FilterI;
+import com.epam.learn.java.ad.gallery.app.db.query.QueryBuilder;
 import com.epam.learn.java.ad.gallery.app.exception.DBProblemException;
 
 /**
@@ -23,6 +29,8 @@ abstract public class BaseDao<T> implements BaseDaoI<T> {
 
 	protected Connection con;
 	protected PreparedStatement insertStatement;
+	
+	protected static Logger logger = LogManager.getLogger();
 
 	public BaseDao(Connection con) {
 		this.con = con;
@@ -86,15 +94,28 @@ abstract public class BaseDao<T> implements BaseDaoI<T> {
 		try (Statement st = con.createStatement()) {
 			st.execute(sql);
 			try (ResultSet rs = st.getResultSet()) {
-
 				while(rs.next()) {
 					res.add(getObject(rs));
 				}
-				
-//				T var;
-//				while((var = getObject(rs)) != null) {
-//					res.add(var);
-//				}
+			}
+		} catch (SQLException e) {
+			throw new DBProblemException(e);
+		}
+		return res;
+	}
+	
+	protected List<T> query(QueryBuilder qb) throws DBProblemException {
+		List<T> res = new ArrayList<>();
+		String q = qb.getQuery(); 
+		
+		try (PreparedStatement ps = con.prepareStatement(q)) {
+			logger.debug(q);
+			qb.populate(ps);
+			ps.execute();
+			try (ResultSet rs = ps.getResultSet()) {
+				while(rs.next()) {
+					res.add(getObject(rs));
+				}
 			}
 		} catch (SQLException e) {
 			throw new DBProblemException(e);
@@ -152,6 +173,19 @@ abstract public class BaseDao<T> implements BaseDaoI<T> {
 			throw new DBProblemException(e);
 		}
 
+	}
+
+	public int count(QueryBuilder qb) throws DBProblemException {
+		try (PreparedStatement ps = con.prepareStatement(qb.getQuery())) {
+			qb.populate(ps);
+			ps.execute();
+			try (ResultSet rs = ps.getResultSet()) {
+				rs.next();
+				return rs.getInt(1);
+			}
+		} catch (SQLException e) {
+			throw new DBProblemException(e);
+		}
 	}
 
 }

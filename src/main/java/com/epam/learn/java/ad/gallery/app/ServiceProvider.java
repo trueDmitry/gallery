@@ -5,7 +5,8 @@ import com.epam.learn.java.ad.gallery.api.ExpositionServiceI;
 import com.epam.learn.java.ad.gallery.api.PaymentServiceI;
 import com.epam.learn.java.ad.gallery.api.SecurityServiceI;
 import com.epam.learn.java.ad.gallery.api.ServiceProviderI;
-import com.epam.learn.java.ad.gallery.api.ViewServiceI;
+import com.epam.learn.java.ad.gallery.api.UserServiceI;
+import com.epam.learn.java.ad.gallery.api.ExpositionViewServiceI;
 
 public class ServiceProvider implements ServiceProviderI{
 
@@ -35,8 +36,13 @@ public class ServiceProvider implements ServiceProviderI{
 	}
 
 	@Override
-	public ViewServiceI getViewService() {
-		return new ViewService(context, getDatabaseService(), getExpositionService());
+	public ExpositionViewServiceI getViewService() {
+		return new ExpositionViewService(this, context);
+	}
+
+	@Override
+	public UserServiceI getUserService() {
+		return new UserService(context, getExpositionService());
 	}
 
 }

@@ -5,6 +5,9 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import com.epam.learn.java.ad.gallery.api.DatabaseServiceI;
 import com.epam.learn.java.ad.gallery.api.ExpositionServiceI;
 import com.epam.learn.java.ad.gallery.api.SecurityServiceI;
@@ -23,12 +26,17 @@ public class ExpositionService implements ExpositionServiceI {
 	private SecurityServiceI securityService;
 	private DatabaseServiceI db;
 	private ApplicationContext context;
+	
+	protected static Logger logger = LogManager.getLogger();
 
 	public ExpositionService(ApplicationContext context, SecurityServiceI securityService,
 			DatabaseServiceI databaseService) {
 		this.securityService = securityService;
 		this.db = databaseService;
 		this.context = context;
+		
+//		logger.trace("test trace not showing");
+//		logger.debug("test debug");
 	}
 
 	public boolean store(Exposition expo) throws DBProblemException {
@@ -92,17 +100,17 @@ public class ExpositionService implements ExpositionServiceI {
 		}
 	}
 
-	@Override
-	public List<Exposition> getExpositions(int startIndex, int quantity, FilterI filter)
-			throws DBProblemException {
-		
-		if (securityService.userHasRole("admin")) {
-			filter.and("published", "1");
-		}
-		
-		try (ExpositionDaoI expoDao = db.getExpositionDao()) {
-			return expoDao.get(startIndex, quantity, filter);
-		}
-	}
+//	@Override
+//	public List<Exposition> getExpositions(int startIndex, int quantity, FilterI filter)
+//			throws DBProblemException {
+//		
+//		if (securityService.userHasRole("admin")) {
+//			filter.and("published", "1");
+//		}
+//		
+//		try (ExpositionDaoI expoDao = db.getExpositionDao()) {
+//			return expoDao.get(startIndex, quantity, filter);
+//		}
+//	}
 
 }

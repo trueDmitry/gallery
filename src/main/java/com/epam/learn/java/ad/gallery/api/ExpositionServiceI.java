@@ -10,8 +10,6 @@ import com.epam.learn.java.ad.gallery.app.model.ExpositionTicket;
 
 public interface ExpositionServiceI {
 
-	List<Exposition> getExpositions(int startIndex, int quantity, FilterI sqlFilter) throws DBProblemException;
-
 	List<ExpositionTicket> getExpositionTickets(int id) throws DBProblemException;
 
 	Optional<ExpositionTicket> getTicketByExposition(int expoId);

@@ -7,16 +7,22 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
-import java.util.function.Consumer;
+
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import com.epam.learn.java.ad.gallery.api.db.ExpositionDaoI;
-import com.epam.learn.java.ad.gallery.api.db.FilterI;
+import com.epam.learn.java.ad.gallery.app.db.query.Filter;
+import com.epam.learn.java.ad.gallery.app.db.query.QueryBuilder;
 import com.epam.learn.java.ad.gallery.app.exception.DBProblemException;
 import com.epam.learn.java.ad.gallery.app.model.Exposition;
 import com.epam.learn.java.ad.gallery.app.model.Room;
 
 public class ExpositionDao extends BaseDao<Exposition> implements ExpositionDaoI {
+	
+	
+	
+	protected static Logger logger = LogManager.getLogger();
 
 	public ExpositionDao(Connection con) {
 		super(con);
@@ -152,20 +158,25 @@ public class ExpositionDao extends BaseDao<Exposition> implements ExpositionDaoI
 		r.setId(rs.getInt(1));
 		r.setName(rs.getString(2));
 	}
-
-	@Override
-	public List<Exposition> get(int startIndex, int quantity, FilterI filter) throws DBProblemException {
-
-		StringBuilder sql = new StringBuilder().append("SELECT ").append(FIELDS).append(" FROM exposition ")
-				.append(" LIMIT ").append(startIndex).append(",").append(quantity);
-
-		return query(sql.toString());
+	
+	public List<Exposition> get(int startIndex, int quantity, Filter filter) throws DBProblemException {
+	
+		QueryBuilder qb = new QueryBuilder();
+		qb.select(FIELDS);
+		qb.from("exposition");
+		qb.where(filter);
+		qb.limit(startIndex, quantity);
+		return query(qb);
 	}
 
 	@Override
-	public int count(FilterI filter) throws DBProblemException {
-		String sql = "SELECT count(id) FROM exposition";
-		return super.count(sql);
+	public int count(Filter filter) throws DBProblemException {
+		QueryBuilder qb = new QueryBuilder();
+		qb.select("count(id)");
+		qb.from("exposition");
+		qb.where(filter);
+		return super.count(qb);
 	}
+
 
 }

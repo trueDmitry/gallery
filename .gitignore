@@ -27,3 +27,4 @@ gallery.iml
 build/
 .idea/
 
+/target/

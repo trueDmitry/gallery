@@ -15,6 +15,7 @@ import com.epam.learn.java.ad.gallery.app.db.ExpositionDao;
 import com.epam.learn.java.ad.gallery.app.db.ExpositionOrderDao;
 import com.epam.learn.java.ad.gallery.app.db.ExpositionRoomDao;
 import com.epam.learn.java.ad.gallery.app.db.RoomDao;
+import com.epam.learn.java.ad.gallery.app.db.Selector;
 import com.epam.learn.java.ad.gallery.app.db.TransactionDao;
 import com.epam.learn.java.ad.gallery.app.db.WalletDao;
 import com.epam.learn.java.ad.gallery.app.exception.DBProblemException;
@@ -65,6 +66,18 @@ public class MysqlService implements DatabaseServiceI {
 			}
 			con = null;
 		}
+	}
+	
+	@Override
+	public Selector getSelector() {
+		// for future
+		return new Selector();
+	}
+
+	@Override
+	public Selector getTransactionSelector() {
+		// for future
+		return new Selector();
 	}
 
 	@Override

@@ -64,6 +64,11 @@ public abstract class WebCommand {
 			return;
 		}
 		
+//		logger.error("test error");
+//		logger.trace("test test");
+		
+		
+//		httpCode = HttpCode.INTERNAL_SERVER_ERROR;
 		if (httpCode != HttpCode.OK) {
 			forwardError(httpCode);
 			return;

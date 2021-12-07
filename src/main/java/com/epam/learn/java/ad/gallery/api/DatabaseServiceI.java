@@ -6,6 +6,7 @@ import com.epam.learn.java.ad.gallery.api.db.ExpositionRoomDaoI;
 import com.epam.learn.java.ad.gallery.api.db.RoomDaoI;
 import com.epam.learn.java.ad.gallery.api.db.TransactionDaoI;
 import com.epam.learn.java.ad.gallery.api.db.WalletDaoI;
+import com.epam.learn.java.ad.gallery.app.db.Selector;
 import com.epam.learn.java.ad.gallery.app.exception.DBProblemException;
 
 public interface DatabaseServiceI {
@@ -25,5 +26,9 @@ public interface DatabaseServiceI {
 	RoomDaoI getRoomDao();
 
 	ExpositionRoomDaoI getExpositionRoomDao();
+
+	Selector getSelector();
+
+	Selector getTransactionSelector();
 
 }

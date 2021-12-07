@@ -10,7 +10,7 @@ public class All extends WebCommand {
 	protected void process() throws Exception {
 //		request.setAttribute("expositions", serviceProvider.getViewService().getExpoViewsAll());
 		int page = new RequestHelper(request).getId("page");
-		request.setAttribute("data", serviceProvider.getViewService().getExpoViews(page));
+		request.setAttribute("data", serviceProvider.getViewService().getExpositionsView(page));
 	}
 
 }
